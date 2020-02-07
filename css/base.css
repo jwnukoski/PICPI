@@ -1,0 +1,172 @@
+/* Basic styling, its suggested to modify user.css to override/change styles */
+
+/* if you hate Google, then remove this and the font-family 'Montserrat' and 'Bebas Neue' */
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Montserrat&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    color: blue;
+}
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-familyv
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', Arial, Helvetica, sans-serif;
+}
+#wrapper-outter {
+    width: 100%;
+    background-color: black;
+}
+.wrapper {
+    max-width: 1024px;
+    margin: auto;
+    overflow: hidden;
+}
+#manage-menu {
+    z-index: 999;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    background-color: black;
+}
+#manage-menu li {
+    flex: 1;
+    display: inline-block;
+    list-style: none;
+    padding: 2em;
+}
+header {
+
+}
+main {
+
+}
+footer {
+
+}
+ul.pics {
+    width: 100vw;
+    height: 100vh;
+    list-style: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+li.pic {
+    display: block;
+    text-align: center;
+}
+li.pic img {
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    list-style: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#clock-wrapper {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+    z-index: 999;
+}
+#clock {
+    flex: 1;
+    text-align: center;
+    padding: 1em;
+    border-radius: 8px;
+    font-size: 2em;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: auto;
+    max-width: 640px;
+    letter-spacing: 0.25em;
+}
+
+/* Transitions. Referenced by transitions.js */
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Management Menus */
+form {
+    margin: 1em;
+    padding: 1em;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+#mgmt-pics {
+    display: flex;
+    list-style: none;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.mgmt-pic img {
+    height: 12em;
+    display: block;
+    margin: auto;
+    padding: 1em;
+}
+.mgmt-pic {
+    flex: 1;
+    border: 1px solid white;
+}
+.mgmt-pic p, .mgmt-delpic {
+    display: block;
+    text-align: center;
+    padding: 0.5em;
+}
+#userList {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+}
+#userList li {
+    flex: 1;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 1em;
+}
+#newusr {
+    padding: 1em;
+    margin: 1em;
+    text-align: right;
+}
+#newusr input[type=submit] {
+    margin: 1em;
+}
+h1 {
+    text-align: center;
+}
