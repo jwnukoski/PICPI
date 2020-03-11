@@ -25,12 +25,14 @@ The suggest database name should be 'picpi'.
 You can then import the provided picpi.sql to create all the necessary tables.
 
 # Creating the read-only user:
-GRANT USAGE ON *.* TO 'picpi-ro'@'localhost' IDENTIFIED BY PASSWORD 'YOUR PASSWORD';
+CREATE USER 'picpi-ro'@'localhost' IDENTIFIED BY '';
 GRANT SELECT ON `picpi`.* TO 'picpi-ro'@'localhost';
+SET PASSWORD FOR 'picpi-ro'@'localhost' = PASSWORD('YOUR OWN PASSWORD');
 
 # Creating the read/write user:
-GRANT USAGE ON *.* TO 'picpi-rw'@'localhost' IDENTIFIED BY PASSWORD 'YOUR PASSWORD';
+CREATE USER 'picpi-rw'@'localhost' IDENTIFIED BY '';
 GRANT SELECT, INSERT, UPDATE, DELETE ON `picpi`.* TO 'picpi-rw'@'localhost';
+SET PASSWORD FOR 'picpi-rw'@'localhost' = PASSWORD('YOUR OWN PASSWORD');
 
 # Management:
 After you have created the database you need to do the following:
