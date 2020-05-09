@@ -1,13 +1,13 @@
 // AJAX Weather
 // https://www.metaweather.com/api/
-fetch('https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/2459115/')
-.then(result => {
-    return result.json();
-})
-.then(data => {
-    console.log(data);
-})
-.catch(error => {
-    console.log(error);
-});
+async function getWeatherAW(proxy, woeId) {
+    try {
+        const result = await fetch(`${proxy}https://www.metaweather.com/api/location/${woeId}`);
+        const data = await result.json();
+        return data;
+    } catch (error) {
+        console.log('Error in weather.js');
+    }
+}
+getWeatherAW('https://cors-anywhere.herokuapp.com/', 2459115).then(result => console.log(result));
 
