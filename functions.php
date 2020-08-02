@@ -2,14 +2,34 @@
 include('config.php');
 session_start();
 
-# Utility / path functions
+# Utility / path functions ----------------------------------------------------------------------
+/**
+ * Return the base directory.
+ * 
+ * Returns the base directory. Located in config.php.
+ * 
+ * @package PICPI
+ * 
+ * @return  String              PICPI's base directory.
+ */
 function getBaseDir() {
-    # Get base directory
     global $base_dir;
     return '/'.$base_dir.'/';
 }
 
-# Connection functions
+# Connection functions ----------------------------------------------------------------------
+/**
+ * Get a PDO connection.
+ * 
+ * Provide a DB username and password, and return a PDO connection.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_username  Database username
+ * @param   String  $_password  Database password
+ * 
+ * @return  PDO                 PDO connection
+ */
 function getConn($_username, $_password) {
     # Get a connection
     global $servername;
@@ -20,6 +40,16 @@ function getConn($_username, $_password) {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $conn;
 }
+
+/**
+ * Get the stored read-only PDO connection.
+ * 
+ * Get the stored read-only PDO connection using credentials in config.php
+ * 
+ * @package PICPI
+ * 
+ * @return  PDO                 Read-Only PDO connection
+ */
 function getConnRO() {
     # Get read-only connection
     global $picpi_ro_usrname;
@@ -27,6 +57,16 @@ function getConnRO() {
 
     return getConn($picpi_ro_usrname, $picpi_ro_passwd);
 }
+
+/**
+ * Get the stored read-write PDO connection.
+ * 
+ * Get the stored read-write PDO connection using credentials in config.php
+ * 
+ * @package PICPI
+ * 
+ * @return  PDO                 Read-write PDO connection
+ */
 function getConnRW() {
     # Get read/write connection
     global $picpi_rw_usrname;
@@ -36,21 +76,47 @@ function getConnRW() {
 }
 
 # Input/Output cleaning
+/**
+ * For future features.
+ * 
+ * This isn't really used at the moment. This could be used to filter input in the future, for additional security etc.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_input     The string input.
+ * @return  String              The modified string.
+ */
 function cleanInput($_input) {
-    # useful?
     $cleanedInput = $_input;
-
     return $cleanedInput;
 }
-# Helps prevent XSS from SQL DB
+
+/**
+ * Helps prevent XSS from SQL DB
+ * 
+ * Helps prevent XSS from SQL DB. Cleans anything coming from the DB to the user.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_output    String data from server.
+ * @return  String              The modified string.
+ */
 function cleanOutput($_output) {
     $cleanedOutput = preg_replace("/&#?[a-z0-9]+;/i","",$_output); 
     return html_entity_decode($cleanedOutput);
 }
 
-# User functions
+# User functions ----------------------------------------------------------------------
+/**
+ * Checks if this is the first startup, and if the first user needs setup.
+ * 
+ * Checks if this is the first startup, and if the first user needs setup.
+ * 
+ * @package PICPI
+ * 
+ * @return  Boolean         Are there any users in the DB?
+ */
 function isInitialSetup() {
-    # checks if this is the first startup, and if the first user needs setup
     try {
         // Get hash from db
         $conn = getConnRO();
@@ -68,15 +134,37 @@ function isInitialSetup() {
         return false;
     }
 }
+
+/**
+ * Register first user for inital setup.
+ * 
+ * Registers the first user as an admin.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_initialUser       The username
+ * @param   String  $_initialPassword   The user password
+ * @return  Boolean                     Success?
+ */
 function initialSetup($_initialUser, $_initialPassword) {
-    # register first user for inital setup
     if (isInitialSetup() && registerUser($_initialUser, $_initialPassword)) {
         return true;
     }
     return false;
 }
+
+/**
+ * Verify username and password exists and matches.
+ * 
+ * Verify username and password exists and matches. Basically just a typical credential check.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_username   The username
+ * @param   String  $_password   The user password
+ * @return  Boolean              Credentials are correct?
+ */
 function verifyUser($_username, $_password) {
-    # verify username and password exists and matches
     $uid = getUserId($_username);
     if ($uid != null) {
         // User id found, now check password
@@ -86,6 +174,17 @@ function verifyUser($_username, $_password) {
     }
     return false;
 }
+
+/**
+ * Removes a user from the database.
+ * 
+ * Removes a user from the database.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_username   The username
+ * @return  Boolean              Removal was a success?
+ */
 function deleteUser($_username) {
     try {
         // Delete user password first, then account
@@ -117,13 +216,33 @@ function deleteUser($_username) {
         return false;
     }
 }
+
+/**
+ * Verifies if a user is logged in.
+ * 
+ * Verifies if a user is logged in, has any session.
+ * 
+ * @package PICPI
+ * 
+ * @return  Boolean              Session is good?
+ */
 function isLoggedIn() {
-    # is user logged in ?
     if (isset($_SESSION['uid']) && isset($_SESSION['username'])) {
         return true;
     }
     return false;
 }
+
+
+/**
+ * Log a user out.
+ * 
+ * Log a user out. Clean session up.
+ * 
+ * @package PICPI
+ * 
+ * @return  Boolean              A session was ended?
+ */
 function logout() {
     if (isLoggedIn()) {
         session_unset($_SESSION['uid']);
@@ -134,8 +253,18 @@ function logout() {
     }
     return false;
 }
+
+/**
+ * Check if username already exists
+ * 
+ * Check if username already exists, if it is available for a new user etc.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_username  The username.
+ * @return  Boolean             Does the user exist?
+ */
 function isUserExisting($_username) {
-    # Check if username already exists
     try {
         $conn = getConnRO();
         $stmt = $conn->prepare("SELECT * FROM usernames WHERE uname = :uname");
@@ -154,8 +283,19 @@ function isUserExisting($_username) {
         return true; // Return true just to error out any validation, dont assume username is available
     }
 }
+
+/**
+ * Add a new user to the database.
+ * 
+ * Add a new user to the database.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_username  The new username.
+ * @param   String  $_password  The new user's password
+ * @return  Boolean             Was the new user created?
+ */
 function registerUser($_username, $_password) {
-    # Register a new user
     // Check if password is decent and username is available
     if ((strlen($_password) > 7) && !isUserExisting($_username)) {
         // TODO: register user (password too)
@@ -193,6 +333,17 @@ function registerUser($_username, $_password) {
     }
     return false;
 }
+
+/**
+ * Returns the DB ID of the username.
+ * 
+ * Returns the DB ID of the username.
+ * 
+ * @package PICPI
+ * 
+ * @param   String  $_username  The username.
+ * @return  Integer             The user integer (index). Will return null if failed or none.
+ */
 function getUserId($_username) {
     # get user id by providing a username (usernames are unique)
     try {
@@ -213,6 +364,16 @@ function getUserId($_username) {
         return null;
     }
 }
+
+/**
+ * Returns an array of usernames from the DB.
+ * 
+ * Returns an array of usernames from the DB.
+ * 
+ * @package PICPI
+ *
+ * @return  Array               A list of usernames.
+ */
 function getUserList() {
     $list = array();
     try {
@@ -233,13 +394,34 @@ function getUserList() {
     }
 }
 
-# User password functions
+# User password functions ----------------------------------------------------------------------
+/**
+ * Returns a hashed form of a raw password.
+ * 
+ * Returns a hashed form of a raw password. Uses PHP's password_hash function.
+ * 
+ * @package PICPI
+ *
+ * @param   String  $_rawPassword   The raw password.
+ * @return  String                  Returns the hashed password, or FALSE on failure. https://www.php.net/manual/en/function.password-hash.php
+ */
 function hashPassword($_rawPassword) {
     # hash password, return the hash
     return password_hash($_rawPassword, PASSWORD_DEFAULT);
 }
+
+/**
+ * Verify password hash by providing raw password and user id.
+ * 
+ * Verify password hash by providing raw password and user id. Check if password is correct.
+ * 
+ * @package PICPI
+ *
+ * @param   Integer $_usernameId    ID of the user
+ * @param   String  $_rawPassword   Raw password input    
+ * @return  String                  Is the password correct?
+ */
 function verifyPassword($_usernameId, $_rawPassword) {
-    # verify password hash by providing raw password and user id
     try {
         // Get hash from db
         $dbHashedPassword = "";
@@ -264,9 +446,20 @@ function verifyPassword($_usernameId, $_rawPassword) {
     }
 }
 
-# Picture functions
+# Picture functions ----------------------------------------------------------------------
+/**
+ * Add a picture, folder, or URL to the sql db for gallery display.
+ * 
+ * Add a picture, folder, or URL to the sql db for gallery display. Can provide ALT attribute text as well.
+ * 
+ * @package PICPI
+ *
+ * @param   String  $_source        The filepath or URL for the image  
+ * @param   String  $_alt           The alt attribute for the image. Not really required.
+ * @return  Boolean                 Was this added successfully?
+ */
 function addPicture($_source, $_alt) {
-    # add a picture (or folder) to the sql db for gallery display
+    # 
     try {
         $conn = getConnRW();
         $stmt = $conn->prepare("INSERT INTO pictures (id, source, alt)
@@ -281,8 +474,20 @@ function addPicture($_source, $_alt) {
         return false;
     }
 }
+
+/**
+ * Modify an image listing.
+ * 
+ * Modify an image listing. Update the filepath or ALT text.
+ * 
+ * @package PICPI
+ *
+ * @param   Integer $_id        The image DB index.
+ * @param   String  $_source    Image source.
+ * @param   String  $_alt       Alt text for image.
+ * @return  Boolean             Was this updated successfully?
+ */
 function updatePic($_id, $_source, $_alt) {
-    # update picture(s) location
     try {
         if (getPicId($_id)) {
             $conn = getConnRW();
@@ -300,6 +505,17 @@ function updatePic($_id, $_source, $_alt) {
         echo "Error: ".$e;
     }
 }
+
+/**
+ * Remove image from listing.
+ * 
+ * Remove the image from the database by picture ID (index).
+ * 
+ * @package PICPI
+ *
+ * @param   Integer $_picid     Picture ID index.
+ * @return  Boolean             Was this removed successfully?
+ */
 function deletePic($_picid) {
     # delete a single picture by its id
     try {
