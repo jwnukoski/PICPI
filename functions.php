@@ -534,8 +534,18 @@ function deletePic($_picid) {
         echo "Error delete picture: ".$e;
     }
 }
+
+/**
+ * Check if picture exists by picture ID.
+ * 
+ * TODO: This should be renamed. Doesn't return an ID, but rather just checks if a picture exists by ID.
+ * 
+ * @package PICPI
+ *
+ * @param   Integer $_id        Picture ID index.
+ * @return  Boolean             Does a picture exist with this ID?
+ */
 function getPicId($_id) {
-    # Check if picture exists by id
     try {
         $conn = getConnRO();
         $stmt = $conn->prepare("SELECT id FROM pictures WHERE id = :id"); 
@@ -551,8 +561,18 @@ function getPicId($_id) {
         return false;
     }
 }
+
+/**
+ * Get picture source by id.
+ * 
+ * Get the source of the picture, by providing the picture ID (index).
+ * 
+ * @package PICPI
+ *
+ * @param   Integer $_id        Picture ID index.
+ * @return  String              Source of the picture.
+ */
 function getPicSource($_id) {
-    # Get picture source by id
     try {
         $result = "Error getting picture source for id: ".$_id.". ";
         $conn = getConnRO();
@@ -571,6 +591,17 @@ function getPicSource($_id) {
         return $result.$e;
     }
 }
+
+/**
+ * Get picture ALT text by id.
+ * 
+ * Get picture ALT text by id, by providing the picture ID (index).
+ * 
+ * @package PICPI
+ *
+ * @param   Integer $_id        Picture ID index.
+ * @return  String              Alt text of the picture.
+ */
 function getPicAlt($_id) {
     # Get picture description / alt by ID
     try {
@@ -591,10 +622,19 @@ function getPicAlt($_id) {
         return $result.$e;
     }
 }
+
+/**
+ * Get all pictures and return the info in an array
+ * 
+ * Get all pictures and return the info in an array. 
+ * 
+ * @package PICPI
+ *
+ * @return  Array              Array is an array of arrays: [id, source, alt, date last updated].
+ */
 function getPics() {
     $pics = array();
 
-    # Get all pictures and return the info in an array
     try {
         $conn = getConnRO();
         $stmt = $conn->prepare("SELECT * FROM pictures");
