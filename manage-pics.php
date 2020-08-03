@@ -1,43 +1,45 @@
-<?php #redirect to login
-require_once('header.php');
-if (!isLoggedIn()) {
-    header('Location: '.getBaseDir().'manage.php');
-}
+<?php 
+    #redirect to login, if not logged in
+    require_once('header.php');
+    if (!isLoggedIn())
+        header('Location: '.getBaseDir().'manage.php');
 ?>
 
-<?php # header menu
-require_once('manage-menu.php'); 
+<?php 
+    # header menu
+    require_once('manage-menu.php'); 
 ?>
 
 <?php # process new picture
-if (isset($_POST['new-pic-src']) && isset($_POST['new-pic-alt'])) {
-    if (addPicture($_POST['new-pic-src'], $_POST['new-pic-alt'])) {
-        # picture uploaded
-        header('Location: '.getBaseDir().'manage-pics.php');
-    } else {
-        # picture upload failed
+    if (isset($_POST['new-pic-src']) && isset($_POST['new-pic-alt'])) {
+        if (addPicture($_POST['new-pic-src'], $_POST['new-pic-alt'])) {
+            # picture uploaded
+            header('Location: '.getBaseDir().'manage-pics.php');
+        } else {
+            # picture upload failed
+        }
     }
-}
 ?>
 
-<?php # process delete picture
-if (isset($_POST['delpicid'])) {
-    if (deletePic($_POST['delpicid'])) {
-        header('Location: '.getBaseDir().'manage-pics.php');
-    } else {
-        # delete pic failed
+<?php 
+    # process delete picture
+    if (isset($_POST['delpicid'])) {
+        if (deletePic($_POST['delpicid'])) {
+            header('Location: '.getBaseDir().'manage-pics.php');
+        } else {
+            # delete pic failed
+        }
     }
-}
-
-# new pic form
+    
+    # new pic form
 ?>
-<form id="newpic" action="<?php echo(getBaseDir());?>manage-pics.php" method="POST">
-    <label for="new-pic-src">Source:</label>
-    <input type="text" name="new-pic-src" value="<?php echo(getBaseDir());?>pics/">
-    <label for="new-pic-alt">Alt:</label>
-    <input type="text" name="new-pic-alt" value="Picture uploaded by user.">
-    <input type="submit" value="List">
-</form>
+    <form id="newpic" action="<?php echo(getBaseDir());?>manage-pics.php" method="POST">
+        <label for="new-pic-src">Source:</label>
+        <input type="text" name="new-pic-src" value="<?php echo(getBaseDir());?>pics/">
+        <label for="new-pic-alt">Alt:</label>
+        <input type="text" name="new-pic-alt" value="Picture uploaded by user.">
+        <input type="submit" value="List">
+    </form>
 
 
 <ul id="mgmt-pics">

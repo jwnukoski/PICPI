@@ -20,8 +20,6 @@ a:hover {
 body {
     background-color: black;
     color: white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-    font-familyv
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -35,19 +33,6 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 1024px;
     margin: auto;
     overflow: hidden;
-}
-#manage-menu {
-    z-index: 999;
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    background-color: black;
-}
-#manage-menu li {
-    flex: 1;
-    display: inline-block;
-    list-style: none;
-    padding: 2em;
 }
 header {
 
@@ -122,6 +107,15 @@ form {
     width: 100%;
     margin: auto;
     text-align: center;
+}
+#loginform {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+#loginform input {
+    margin: 1em 0 1em 0;
 }
 #mgmt-pics {
     display: flex;
