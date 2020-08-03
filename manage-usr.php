@@ -38,13 +38,15 @@ require_once('manage-menu.php');
 # new user form
 ?>
 <form id="newusr" action="<?php echo(getBaseDir());?>manage-usr.php" method="POST">
-    <label for="newuser">Username:</label>
-    <input type="text" name="newuser">
-    <label for="newpass">Password:</label>
-    <input type="password" name="newpass">
-    <label for="newpassconfirm">Confirm Password:</label>
-    <input type="password" name="newpassconfirm">
-    <input type="submit" value="Create">
+    <div class="form-group">
+        <label for="newuser">Username:</label>
+        <input type="text" name="newuser" class="form-control" required autofocus>
+        <label for="newpass">Password:</label>
+        <input type="password" name="newpass" class="form-control" required>
+        <label for="newpassconfirm">Confirm Password:</label>
+        <input type="password" name="newpassconfirm" class="form-control" required>
+        <input type="submit" value="Create">
+    </div>
 </form>
 
 <ul id="userList">

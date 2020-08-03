@@ -1,9 +1,16 @@
 /* Only essential Javascript should go here */
 
-/* Hide all pictures at the start */
-var pictures = document.getElementsByClassName("pic");
-for (var i = 0; i < pictures.length; i++) {
-    pictures[i].style.opacity = "0";
+// Get page path
+let path = window.location.pathname;
+path = path.split('/');
+page = path[path.length - 1];
+
+if (page === "" || page === "index.php") {
+    // Home page (index.php)
+    document.body.classList.add('homepage');
+
+    /* Hide all pictures at the start */
+    let pics = $('.pic');
+    console.log(pics);
+    $('.pic').css( "opacity", "0" );
 }
-
-
