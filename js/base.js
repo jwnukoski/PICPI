@@ -11,6 +11,5 @@ if (page === "" || page === "index.php") {
 
     /* Hide all pictures at the start */
     let pics = $('.pic');
-    console.log(pics);
     $('.pic').css( "opacity", "0" );
 }

@@ -34,14 +34,17 @@
     # new pic form
 ?>
     <form id="newpic" action="<?php echo(getBaseDir());?>manage-pics.php" method="POST">
-        <label for="new-pic-src">Source:</label>
-        <input type="text" name="new-pic-src" value="<?php echo(getBaseDir());?>pics/">
-        <label for="new-pic-alt">Alt:</label>
-        <input type="text" name="new-pic-alt" value="Picture uploaded by user.">
-        <input type="submit" value="List">
+        <div class="form-group">
+            <label for="new-pic-src">Source:</label>
+            <input type="text" name="new-pic-src" value="<?php echo(getBaseDir());?>pics/" class="form-control" required autofocus>
+            <label for="new-pic-alt">Alt:</label>
+            <input type="text" name="new-pic-alt" value="Picture uploaded by user." class="form-control">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">List</button>
+        </div>
     </form>
 
 
+<!-- https://getbootstrap.com/docs/4.0/components/card/ -->
 <ul id="mgmt-pics">
 <?php # list pictures and delete options
 $pics = getPics();
