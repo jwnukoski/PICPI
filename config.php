@@ -8,8 +8,8 @@ $dbname = 'picpi';
 
 # SQL database users. MUST be updated prior to using:
 $picpi_ro_usrname = "picpi-ro";
-$picpi_ro_passwd = 'READ-ONLY';
+$picpi_ro_passwd = 'CHANGE_ME';
 
 $picpi_rw_usrname = "picpi-rw";
-$picpi_rw_passwd = 'READ-WRITE';
+$picpi_rw_passwd = 'CHANGE_ME';
 ?>
