@@ -43,9 +43,6 @@
         </div>
     </form>
 
-
-<!-- https://getbootstrap.com/docs/4.0/components/card/ -->
-
 <?php # list pictures and delete options
 $pics = getPics();
 ?>
