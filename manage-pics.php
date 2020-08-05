@@ -45,22 +45,29 @@
 
 
 <!-- https://getbootstrap.com/docs/4.0/components/card/ -->
-<ul id="mgmt-pics">
+
 <?php # list pictures and delete options
 $pics = getPics();
-for ($i = 0; $i < sizeof($pics); $i++) {
-    echo('<li class="mgmt-pic" id="'.$pics[$i][0].'"><img src="'.$pics[$i][1].'" alt="'.$pics[$i][2].'"><p><b>Last Updated: </b>'.$pics[$i][3].'</p><p><b>ID: </b>'.$pics[$i][0].'</p><p><b>Source: </b>'.$pics[$i][1].'</p><p><b>Alt: </b>'.$pics[$i][2].'</p>');
-    
-    # Delete picture form
-    ?>
-        <form class="mgmt-delpic" action="<?php echo(getBaseDir());?>manage-pics.php" method="POST">
-            <input type="hidden" name="delpicid" value="<?php echo($pics[$i][0]); ?>">
-            <input type="submit" value="Unlist">
-        </form>
-    <?php
-    echo('</li>');
-}
 ?>
-</ul>
-
+<div id="mgmt-pics">
+    <?php for ($i = 0; $i < sizeof($pics); $i++) { ?>
+        <div class="card mgmt-pic" style="width: 18rem;" id="<?php $pics[$i][0] ?>">
+            <img src="<?php echo($pics[$i][1]); ?>" alt="<?php echo($pics[$i][2]); ?>" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo($pics[$i][1]); ?></h5>
+                <p class="card-text">
+                    <p><b>ID: </b><?php echo($pics[$i][0]); ?></p>
+                    <p><b>Last Updated: </b><br><?php echo($pics[$i][3]); ?></p>
+                    <p><b>Alt: </b><br><?php echo($pics[$i][2]); ?></p>
+                </p>
+                <form class="mgmt-delpic" action="<?php echo(getBaseDir());?>manage-pics.php" method="POST">
+                    <input type="hidden" name="delpicid" value="<?php echo($pics[$i][0]); ?>">
+                    <input type="submit" value="Unlist" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    <?php } ?>
+</div>
 <?php require_once('footer.php'); ?>
+
+
