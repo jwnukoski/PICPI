@@ -48,7 +48,7 @@ $pics = getPics();
 ?>
 <div id="mgmt-pics">
     <?php for ($i = 0; $i < sizeof($pics); $i++) { ?>
-        <div class="card mgmt-pic" style="width: 18rem;" id="<?php $pics[$i][0] ?>">
+        <div class="card mgmt-pic" id="<?php $pics[$i][0] ?>">
             <img src="<?php echo($pics[$i][1]); ?>" alt="<?php echo($pics[$i][2]); ?>" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title"><?php echo($pics[$i][1]); ?></h5>

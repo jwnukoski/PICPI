@@ -33,15 +33,6 @@ body.homepage {
     margin: auto;
     overflow: hidden;
 }
-header {
-
-}
-main {
-
-}
-footer {
-
-}
 ul.pics {
     width: 100vw;
     height: 100vh;
@@ -65,7 +56,7 @@ li.pic img {
     top: 0;
     left: 0;
 }
-#clock-wrapper {
+.valign-wrapper {
     display: flex;
     align-items: center;
     position: fixed;
@@ -77,6 +68,11 @@ li.pic img {
     text-align: center;
     z-index: 999;
 }
+.valign-item {
+    flex: 1;
+    max-width: 640px;
+    margin: auto;
+}
 #clock {
     flex: 1;
     text-align: center;
@@ -84,11 +80,8 @@ li.pic img {
     border-radius: 8px;
     font-size: 2em;
     background-color: rgba(0, 0, 0, 0.5);
-    margin: auto;
-    max-width: 640px;
     letter-spacing: 0.25em;
 }
-
 /* Transitions. Referenced by transitions.js */
 @keyframes fadein {
     from { opacity: 0; }
@@ -100,12 +93,10 @@ li.pic img {
 }
 
 /* Management Menus */
-form {
-    margin: 1em;
+form input {
+    margin: 1em auto;
     padding: 1em;
-    width: 100%;
-    margin: auto;
-    text-align: center;
+    text-align: left;
 }
 #loginform {
     width: 100%;
