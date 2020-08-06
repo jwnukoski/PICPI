@@ -14,15 +14,19 @@ echo('</ul>');
 
 <!-- Extras: -->
 <!-- Clock -->
-<div class="valign-wrapper"><div id="clock" class="valign-item"></div></div>
-<script src="<?php echo(getBaseDir()); ?>js/clock.js"></script>
+<?php if (clockeEnabled()) { ?>
+    <div class="valign-wrapper"><div id="clock" class="valign-item"></div></div>
+    <script src="<?php echo(getBaseDir()); ?>js/clock.js"></script>
+<?php } ?>
 
 <!-- RSS -->
 <div id="rss-feed"></div>
 <script src="<?php echo(getBaseDir()); ?>js/rss.js"></script>
 
 <!-- Weather -->
-<div id="weather"></div>
-<script src="<?php echo(getBaseDir()); ?>js/weather.js"></script>
+<?php if (weatherEnabled()) { ?>
+    <div id="weather">Weather loading...</div>
+    <script src="<?php echo(getBaseDir()); ?>js/weather.js"></script>
+<? } ?> 
 
 <?php require_once('footer.php'); ?>

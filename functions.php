@@ -661,4 +661,36 @@ function getPics() {
         return $pics;
     }
 }
+
+
+
+
+
+
+# Widget/App/JS functions ----------------------------------------------------------------------
+/**
+ * Returns boolean if clock app is enabled.
+ * 
+ * Gets value from DB and returns True/False if the clock.js should be loaded.
+ * 
+ * @package PICPI
+ *
+ * @return  Boolean              Load clock.js?
+ */
+function clockeEnabled() {
+    return true;
+}
+
+/**
+ * Returns boolean if weather app is enabled.
+ * 
+ * Gets value from DB and returns True/False if the weather.js should be loaded.
+ * 
+ * @package PICPI
+ *
+ * @return  Boolean              Load weather.js?
+ */
+function weatherEnabled() {
+    return true;
+}
 ?>

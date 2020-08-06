@@ -82,6 +82,12 @@ li.pic img {
     background-color: rgba(0, 0, 0, 0.5);
     letter-spacing: 0.25em;
 }
+#weather {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
 /* Transitions. Referenced by transitions.js */
 @keyframes fadein {
     from { opacity: 0; }
