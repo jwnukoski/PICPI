@@ -18,45 +18,20 @@ a:hover {
     color: blue;
 }
 body {
-    background-color: black;
-    color: white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-    font-familyv
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bebas Neue', Arial, Helvetica, sans-serif;
+body.homepage {
+    background-color: black;
+    color: white;
+    overflow: hidden;
 }
 #wrapper-outter {
     width: 100%;
-    background-color: black;
 }
 .wrapper {
     max-width: 1024px;
     margin: auto;
     overflow: hidden;
-}
-#manage-menu {
-    z-index: 999;
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    background-color: black;
-}
-#manage-menu li {
-    flex: 1;
-    display: inline-block;
-    list-style: none;
-    padding: 2em;
-}
-header {
-
-}
-main {
-
-}
-footer {
-
 }
 ul.pics {
     width: 100vw;
@@ -81,7 +56,7 @@ li.pic img {
     top: 0;
     left: 0;
 }
-#clock-wrapper {
+.valign-wrapper {
     display: flex;
     align-items: center;
     position: fixed;
@@ -93,6 +68,11 @@ li.pic img {
     text-align: center;
     z-index: 999;
 }
+.valign-item {
+    flex: 1;
+    max-width: 640px;
+    margin: auto;
+}
 #clock {
     flex: 1;
     text-align: center;
@@ -100,11 +80,8 @@ li.pic img {
     border-radius: 8px;
     font-size: 2em;
     background-color: rgba(0, 0, 0, 0.5);
-    margin: auto;
-    max-width: 640px;
     letter-spacing: 0.25em;
 }
-
 /* Transitions. Referenced by transitions.js */
 @keyframes fadein {
     from { opacity: 0; }
@@ -116,33 +93,44 @@ li.pic img {
 }
 
 /* Management Menus */
-form {
-    margin: 1em;
+form input {
+    margin: 1em auto;
     padding: 1em;
+    text-align: left;
+}
+.mgmt-form {
+    max-width: 25em;
+    margin: 2em auto;
+    padding: 1em;
+}
+#loginform {
     width: 100%;
+    max-width: 330px;
+    padding: 15px;
     margin: auto;
-    text-align: center;
+}
+#loginform input {
+    margin: 1em 0 1em 0;
 }
 #mgmt-pics {
     display: flex;
     list-style: none;
     width: 100%;
     flex-wrap: wrap;
-}
-.mgmt-pic img {
-    height: 12em;
-    display: block;
-    margin: auto;
-    padding: 1em;
+    flex-direction: row;
 }
 .mgmt-pic {
     flex: 1;
-    border: 1px solid white;
+    border: 1px solid grey;
+    margin: 1em;
+    min-width: 15em;
 }
-.mgmt-pic p, .mgmt-delpic {
-    display: block;
+.mgmt-pic img {
+    min-height: 12em;
+}
+.mgmt-pic h5, .mgmt-pic p, .mgmt-pic form {
     text-align: center;
-    padding: 0.5em;
+    padding: 0.25em;
 }
 #userList {
     display: flex;

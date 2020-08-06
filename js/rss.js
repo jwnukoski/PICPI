@@ -1,5 +1,5 @@
 function showRSS(str) {
-    if (str.length==0) {
+    if (str.length === 0) {
       document.getElementById("rss-feed").innerHTML="";
       return;
     }
@@ -10,7 +10,7 @@ function showRSS(str) {
       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
     xmlhttp.onreadystatechange=function() {
-      if (this.readyState==4 && this.status==200) {
+      if (this.readyState === 4 && this.status === 200) {
         document.getElementById("rss-feed").innerHTML=this.responseText;
       }
     }

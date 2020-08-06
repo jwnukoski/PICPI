@@ -14,7 +14,7 @@ echo('</ul>');
 
 <!-- Extras: -->
 <!-- Clock -->
-<div id="clock-wrapper"><div id="clock"></div></div>
+<div class="valign-wrapper"><div id="clock" class="valign-item"></div></div>
 <script src="<?php echo(getBaseDir()); ?>js/clock.js"></script>
 
 <!-- RSS -->

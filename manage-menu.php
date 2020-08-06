@@ -1,11 +1,17 @@
 <?php 
 # Management menus
 if (isLoggedIn()) { ?>
-    <ul id="manage-menu">
-        <li><a href="<?php echo(getBaseDir()); ?>index.php">Home</a></li>
-        <li><a href="<?php echo(getBaseDir()); ?>manage-usr.php">Users</a></li>
-        <li><a href="<?php echo(getBaseDir()); ?>manage-pics.php">Pictures</a></li>
-        <li><a href="<?php echo(getBaseDir()); ?>manage-settings.php">Settings</a></li>
-        <li><a href="<?php echo(getBaseDir()); ?>logout.php">Log Out</a></li>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">PICPI</a>
+    <div class="collapse navbar-collapse">
+
+    </div>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-link"><a href="<?php echo(getBaseDir()); ?>index.php" class="nav-link">Home</a></li>
+        <li class="nav-link"><a href="<?php echo(getBaseDir()); ?>manage-usr.php" class="nav-link">Users</a></li>
+        <li class="nav-link"><a href="<?php echo(getBaseDir()); ?>manage-pics.php" class="nav-link">Pictures</a></li>
+        <li class="nav-link"><a href="<?php echo(getBaseDir()); ?>manage-settings.php" class="nav-link">Settings</a></li>
+        <li class="nav-link"><a href="<?php echo(getBaseDir()); ?>logout.php" class="nav-link">Log Out</a></li>
     </ul>
+</nav>
 <?php } ?>

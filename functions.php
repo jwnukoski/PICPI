@@ -325,11 +325,19 @@ function registerUser($_username, $_password) {
             $conn = null;
             return true;
         } catch(Exception $e) {
-            echo "Error: ".$e;
+            echo '
+            <div class="alert alert-danger" role="alert">
+                Error: '.$e.'
+            </div>
+            ';
             return false;
         }
     } else {
-        echo 'Password not long enough, or username exists. Password must be 8+ in length.';
+        echo '
+        <div class="alert alert-danger" role="alert">
+            Password not long enough, or username exists. Password must be 8+ in length.
+        </div>
+        ';
     }
     return false;
 }

@@ -3,8 +3,8 @@ const displayDate = true;
 const displayTime = true;
 
 // To not load this script at all, update the settings in the web interface. Otherwise, you can manually disable it here, but it will still use resources loading the script.
-var enabled = true;
-var eClock = document.getElementById('clock');
+let enabled = true;
+let eClock = document.getElementById('clock');
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
