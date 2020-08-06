@@ -1,39 +1,35 @@
 <?php 
-    #redirect to login, if not logged in
+    # Header
     require_once('header.php');
+
+    # Redirect to login, if not logged in
     if (!isLoggedIn())
         header('Location: '.getBaseDir().'manage.php');
-?>
 
-<?php 
-    # header menu
+    # Header menu
     require_once('manage-menu.php'); 
 ?>
-
-<?php # process new picture
+<h1>Manage Pictures</h1>
+<?php
+    # Process new picture
     if (isset($_POST['new-pic-src']) && isset($_POST['new-pic-alt'])) {
         if (addPicture($_POST['new-pic-src'], $_POST['new-pic-alt'])) {
             # picture uploaded
             header('Location: '.getBaseDir().'manage-pics.php');
         } else {
             # picture upload failed
+            echo '
+            <div class="alert alert-danger" role="alert">
+                Error adding picture!
+            </div>
+            ';
         }
     }
-?>
 
-<?php 
-    # process delete picture
-    if (isset($_POST['delpicid'])) {
-        if (deletePic($_POST['delpicid'])) {
-            header('Location: '.getBaseDir().'manage-pics.php');
-        } else {
-            # delete pic failed
-        }
-    }
-    
-    # new pic form
+    # New pic form
 ?>
-    <form id="newpic" action="<?php echo(getBaseDir());?>manage-pics.php" method="POST">
+    <form action="<?php echo(getBaseDir());?>manage-pics.php" method="POST" class="mgmt-form">
+        <h4>Add pictures here:</h4>
         <div class="form-group">
             <label for="new-pic-src">Source:</label>
             <input type="text" name="new-pic-src" value="<?php echo(getBaseDir());?>pics/" class="form-control" required autofocus>
@@ -43,8 +39,24 @@
         </div>
     </form>
 
-<?php # list pictures and delete options
-$pics = getPics();
+<h2>Current pictures:</h2>
+<?php 
+    # Process delete picture
+    if (isset($_POST['delpicid'])) {
+        if (deletePic($_POST['delpicid'])) {
+            header('Location: '.getBaseDir().'manage-pics.php');
+        } else {
+            # delete pic failed
+            echo '
+            <div class="alert alert-danger" role="alert">
+                Error deleting picture!
+            </div>
+            ';
+        }
+    }
+
+    # List pictures and delete options
+    $pics = getPics();
 ?>
 <div id="mgmt-pics">
     <?php for ($i = 0; $i < sizeof($pics); $i++) { ?>
@@ -65,6 +77,10 @@ $pics = getPics();
         </div>
     <?php } ?>
 </div>
-<?php require_once('footer.php'); ?>
+
+<?php
+# Footer
+require_once('footer.php'); 
+?>
 
 

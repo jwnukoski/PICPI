@@ -1,12 +1,12 @@
 <?php
-#redirect to login
+# Header
 require_once('header.php');
-if (!isLoggedIn()) {
+
+# Redirect to login, if not logged in
+if (!isLoggedIn())
     header('Location: '.getBaseDir().'manage.php');
-}
-?>
-<?php
-# header menu
+
+# Header menu
 require_once('manage-menu.php'); 
 ?>
 
@@ -15,4 +15,7 @@ require_once('manage-menu.php');
 
 
 
-<?php require_once('footer.php'); ?>
+<?php 
+# Footer
+require_once('footer.php'); 
+?>
