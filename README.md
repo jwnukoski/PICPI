@@ -3,8 +3,7 @@ PICPI - Picture Pi
 
 # Goal:
 Provide an easy way to display pictures, with optional transitions, a clock for time, weather and other features like RSS feeds.
-This project is intended to be a RaspberryPi project, however it can be hosted on any PC with a Apache / PHP / SQL stack.
-If this is a home setup on RaspberryPi, then you can simply use XAMPP.
+This project is intended to be a RaspberryPi project, however it can be hosted on any PC with an Apache / PHP / SQL stack.
 
 # Progress:
 This project currently only has basic functionality:
@@ -16,8 +15,6 @@ This project currently only has basic functionality:
 # TODO:
     - Improve management menu and visuals.
     - Add RSS feeds.
-    - Add weather.
-    - Add settings menu to allow simple enable/disable of features etc.
     - Fix picture stretch.
 
 # Creating the database:
@@ -37,10 +34,15 @@ SET PASSWORD FOR 'picpi-rw'@'localhost' = PASSWORD('YOUR OWN PASSWORD');
 # Management:
 After you have created the database you need to do the following:
     1) Copy all files into your web server folder. I suggest you keep it in a subfolder.
+    
     2) Modify config.php to your picpi-ro and picpi-rw passwords.
+    
     3) If you change the directory name, then modify $base_dir in config.php to the subfolder name.
+    
     4) Database and server settings are also located in config.php, if you wish to modify those.
+    
     5) Go to manage.php in a browser (i.e. localhost/picpi/manage.php) and create an initial account.
+    
     6) You can now manage everything from the manage.php page.
 
 # Pictures
