@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 07, 2020 at 08:34 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Generation Time: Aug 08, 2020 at 09:45 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -70,6 +69,47 @@ CREATE TABLE `usernames` (
   `uname` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `widget_clock`
+--
+
+CREATE TABLE `widget_clock` (
+  `id` int(11) NOT NULL,
+  `value` varchar(256) NOT NULL,
+  `description` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `widget_clock`
+--
+
+INSERT INTO `widget_clock` (`id`, `value`, `description`) VALUES
+(1, '1', 'Display clock? 1 = Yes.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `widget_weather`
+--
+
+CREATE TABLE `widget_weather` (
+  `id` int(11) NOT NULL,
+  `value` varchar(256) NOT NULL,
+  `description` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `widget_weather`
+--
+
+INSERT INTO `widget_weather` (`id`, `value`, `description`) VALUES
+(1, '1', 'Enabled? 1 = Yes.'),
+(2, '2459115', 'WOE ID. The location ID.'),
+(3, '0', 'Use Fahrenheit? 0 = celsius, 1 = fahrenheit'),
+(4, 'https://cors-anywhere.herokuapp.com/', 'Weather proxy');
+
 --
 -- Indexes for dumped tables
 --
@@ -101,6 +141,18 @@ ALTER TABLE `usernames`
   ADD UNIQUE KEY `uname` (`uname`);
 
 --
+-- Indexes for table `widget_clock`
+--
+ALTER TABLE `widget_clock`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `widget_weather`
+--
+ALTER TABLE `widget_weather`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -108,19 +160,31 @@ ALTER TABLE `usernames`
 -- AUTO_INCREMENT for table `passwords`
 --
 ALTER TABLE `passwords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `usernames`
 --
 ALTER TABLE `usernames`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `widget_clock`
+--
+ALTER TABLE `widget_clock`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `widget_weather`
+--
+ALTER TABLE `widget_weather`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

@@ -272,6 +272,7 @@ function isUserExisting($_username) {
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 if ($_username == $row['uname']) {
+                    $conn = null;
                     return true;
                 }
             }
@@ -467,7 +468,6 @@ function verifyPassword($_usernameId, $_rawPassword) {
  * @return  Boolean                 Was this added successfully?
  */
 function addPicture($_source, $_alt) {
-    # 
     try {
         $conn = getConnRW();
         $stmt = $conn->prepare("INSERT INTO pictures (id, source, alt)
@@ -561,6 +561,7 @@ function getPicId($_id) {
         $stmt->execute();
         $conn = null;
         if ($stmt->rowCount() > 0) {
+            $conn = null;
             return true;
         }
         return false;
@@ -677,8 +678,52 @@ function getPics() {
  *
  * @return  Boolean              Load clock.js?
  */
-function clockeEnabled() {
-    return true;
+function clockEnabled() {
+    try {
+        $conn = getConnRO();
+        $stmt = $conn->prepare("SELECT * FROM widget_clock WHERE id = 1");
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                if ($row['value'] == 1) {
+                    $conn = null;
+                    return true;
+                }
+            }
+        }
+        $conn = null;
+        return false;
+    } catch(Exception $e) {
+        echo "Failure in getting clock enabled: ".$e;
+        return false;
+    }
+}
+
+/**
+ * Set if the clock should display into the database.
+ * 
+ * Gets value from DB and returns True/False if the weather.js should be loaded.
+ * 
+ * @package PICPI
+ *
+ * @param   Array   $arr         Array of settings to update.
+ * @return  Boolean              Success?
+ */
+function setClockSettings($arr) {
+    // only supports enable setting now.
+    try {
+        $conn = getConnRW();
+            
+        // Index 1, set enabled (0, 1)
+        $stmt = $conn->prepare("UPDATE widget_clock SET value = :value WHERE id = 1");
+        $stmt->bindParam(':value', $arr[0]);
+        $stmt->execute();
+
+        $conn = null;
+        return true;
+    } catch(Exception $e) {
+        echo "Error: ".$e;
+        return false;
+    }
 }
 
 /**
@@ -690,7 +735,91 @@ function clockeEnabled() {
  *
  * @return  Boolean              Load weather.js?
  */
-function weatherEnabled() {
-    return true;
+function getClockSettings() {
+    try {
+        $rArr = array();
+        $conn = getConnRO();
+        $stmt = $conn->prepare("SELECT * FROM widget_clock");
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($rArr, $row['value']);
+            }
+        }
+        $conn = null;
+        return $rArr;
+    } catch(Exception $e) {
+        echo "Failure in getting clock settings: ".$e;
+        return null;
+    }
+}
+
+/**
+ * Returns the WOE ID
+ * 
+ * Gets value from DB and returns the weather location id.
+ * 
+ * @package PICPI
+ *
+ * @return  String              WOE ID
+ */
+function getWeatherSettings() {
+    try {
+        $rArr = array();
+        $conn = getConnRO();
+        $stmt = $conn->prepare("SELECT * FROM widget_weather");
+        if ($stmt->execute()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($rArr, $row['value']);
+            }
+        }
+        $conn = null;
+        return $rArr;
+    } catch(Exception $e) {
+        echo "Failure in getting weather settings: ".$e;
+        return null;
+    }
+}
+
+/**
+ * Set weather settings.
+ * 
+ * Sets the weather settings in database for weather.js. Returns if successful or not.
+ * 
+ * @package PICPI
+ *
+ * @param   Array   $arr         Array of settings to update.
+ * @return  Boolean              Success?
+ */
+function setWeatherSettings($arr) {
+    // only supports enable, WOE ID, and measurement settings now.
+    try {
+        $conn = getConnRW();
+
+        // Set if Enabled
+        $stmt = $conn->prepare("UPDATE widget_weather SET value = :value WHERE id = 1");
+        $stmt->bindParam(':value', $arr[0]);
+        $stmt->execute();
+            
+        // Set WOE ID
+        $stmt = $conn->prepare("UPDATE widget_weather SET value = :value WHERE id = 2");
+        $stmt->bindParam(':value', $arr[1]);
+        $stmt->execute();
+
+        // Set if to use Fahrenheit
+        $stmt = $conn->prepare("UPDATE widget_weather SET value = :value WHERE id = 3");
+        $stmt->bindParam(':value', $arr[2]);
+        $stmt->execute();
+
+        // Set proxy
+        $stmt = $conn->prepare("UPDATE widget_weather SET value = :value WHERE id = 4");
+        $stmt->bindParam(':value', $arr[3]);
+        $stmt->execute();
+
+        $conn = null;
+        return true;
+    } catch(Exception $e) {
+        echo "Error: ".$e;
+        return false;
+    }
 }
 ?>

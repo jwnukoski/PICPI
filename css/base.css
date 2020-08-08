@@ -10,12 +10,12 @@
     box-sizing: border-box;
 }
 a {
-    color: white;
+    color: blue;
     text-decoration: none;
     font-weight: bold;
 }
 a:hover {
-    color: blue;
+    color: red;
 }
 body {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
@@ -87,6 +87,9 @@ li.pic img {
     top: 0;
     left: 0;
     z-index: 9999;
+}
+#weatherParams {
+    display: none;
 }
 /* Transitions. Referenced by transitions.js */
 @keyframes fadein {

@@ -6,18 +6,10 @@
 if (isInitialSetup() && isset($_POST['initial_username']) && isset($_POST['initial_password']) && isset($_POST['initial_password_confirm'])) {
     if ($_POST['initial_password'] == $_POST['initial_password_confirm']) {
         if (initialSetup($_POST['initial_username'], $_POST['initial_password'])) {
-            echo '
-            <div class="alert alert-success" role="alert">
-                User created.
-            </div>
-            ';
+            echo '<div class="alert alert-success" role="alert">User created.</div>';
         }
     } else {
-        echo '
-        <div class="alert alert-danger" role="alert">
-            Passwords did not match.
-        </div>
-        ';
+        echo '<div class="alert alert-danger" role="alert">Passwords did not match.</div>';
     }
 }
 # Initial setup/user
@@ -45,10 +37,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && !isLoggedIn() && !
         $_SESSION['uid'] = getUserId($_POST['username']);
         $_SESSION['username'] = $_POST['username'];
     } else {
-        echo '
-        <div class="alert alert-danger" role="alert">
-            Login failed. Invalid credentials.
-        </div>';
+        echo '<div class="alert alert-danger" role="alert">Login failed. Invalid credentials.</div>';
     }
 }
 # Login Form
