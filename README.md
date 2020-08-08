@@ -33,6 +33,7 @@ SET PASSWORD FOR 'picpi-rw'@'localhost' = PASSWORD('YOUR OWN PASSWORD');
 
 # Management:
 After you have created the database you need to do the following:
+    
     1) Copy all files into your web server folder. I suggest you keep it in a subfolder.
     
     2) Modify config.php to your picpi-ro and picpi-rw passwords.
