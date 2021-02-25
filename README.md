@@ -1,6 +1,6 @@
 # PICPI
 PICPI - Picture Pi  
-![Preview of PICPI](https://i.imgur.com/tSKbRyw.gif "PICPI Demo")
+![Preview of PICPI](https://github.com/jwnukoski/PICPI/blob/refactor/demo.gif?raw=true "PICPI Demo")
 
 # Goal:
 Provide an easy way to display pictures, with optional transitions, a clock for time, weather and other features like RSS feeds.
