@@ -1,6 +1,6 @@
 <?php
-require_once('header.php');
-require_once('footer.php');
+require_once('../header.php');
+require_once('../footer.php');
 
 if (isLoggedIn() && logout()) {
     echo 'Logged out. Redirecting...';

@@ -1,4 +1,5 @@
-<?php require_once('header.php'); ?>
+<?php require_once('../header.php'); ?>
+
 <div class="text-center">
 <?php
 /* ------------ LOGIN FORMS ------------ */
@@ -19,7 +20,7 @@ if (isInitialSetup() && !isset($_POST['inital_username'])) { ?>
             <div class="alert alert-warning" role="alert">
                 This is the initial setup, enter an admin account below:
             </div>
-            <form action="<?php echo(getBaseDir());?>manage.php" method="POST" class="form-signin">
+            <form action="<?php echo(getBaseDir());?>/manage/index.php" method="POST" class="form-signin">
                 <label for="initial_username" class="sr-only">Username:</label>
                 <input type="text" name="initial_username" class="form-control" placeholder="Username" required autofocus>
                 <label for="initial_password" class="sr-only">Password:</label>
@@ -44,7 +45,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && !isLoggedIn() && !
 if (!isLoggedIn() && !isInitialSetup()) { ?>
 <div class="valign-wrapper">
     <div class="valign-item">
-        <form action="<?php echo(getBaseDir());?>manage.php" method="POST" class="form-signin" id="loginform">
+        <form action="<?php echo(getBaseDir());?>/manage/index.php" method="POST" class="form-signin" id="loginform">
             <h1 class="h3 mb-3 font-weight-normal">Login</h1>
             <label for="username" class="sr-only">Username:</label>
             <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
@@ -59,9 +60,9 @@ if (!isLoggedIn() && !isInitialSetup()) { ?>
 <?php
 # header menu
 if (isLoggedIn()) {
-    require_once('manage-menu.php'); 
+    require_once('menu.php'); 
 }
 ?>
 </div>
 
-<?php require_once('footer.php'); ?>
+<?php require_once('../footer.php'); ?>

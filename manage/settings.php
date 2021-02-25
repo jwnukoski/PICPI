@@ -1,13 +1,13 @@
 <?php
 # Header
-require_once('header.php');
+require_once('../header.php');
 
 # Redirect to login, if not logged in
 if (!isLoggedIn())
-    header('Location: '.getBaseDir().'manage.php');
+    header('Location: '.getBaseDir().'/manage/index.php');
 
 # Header menu
-require_once('manage-menu.php'); 
+require_once('menu.php'); 
 ?>
 
 <h1>Settings</h1>
@@ -27,7 +27,7 @@ require_once('manage-menu.php');
         }
     }
 ?>
-<form action="<?php echo(getBaseDir());?>manage-settings.php" method="POST" class="mgmt-form" id="weatherForm">
+<form action="<?php echo(getBaseDir());?>/manage/settings.php" method="POST" class="mgmt-form" id="weatherForm">
 <?php $weatherSettings = getWeatherSettings(); ?>
     <h4>Weather</h4>
     <div class="form-group">
@@ -82,7 +82,7 @@ require_once('manage-menu.php');
         }
     }
 ?>
-<form action="<?php echo(getBaseDir());?>manage-settings.php" method="POST" class="mgmt-form" id="clockForm">
+<form action="<?php echo(getBaseDir());?>/manage/settings.php" method="POST" class="mgmt-form" id="clockForm">
     <?php $clockSettings = getClockSettings();?>
     <h4>Clock</h4>
     <div class="form-group">
@@ -101,5 +101,5 @@ require_once('manage-menu.php');
 
 <?php 
 # Footer
-require_once('footer.php'); 
+require_once('../footer.php'); 
 ?>
