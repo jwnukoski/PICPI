@@ -1,13 +1,13 @@
 <?php 
     # Header
-    require_once('header.php');
+    require_once('../header.php');
 
     # Redirect to login, if not logged in
     if (!isLoggedIn())
-        header('Location: '.getBaseDir().'manage.php');
+        header('Location: '.getBaseDir().'/manage/index.php');
 
     # Header menu
-    require_once('manage-menu.php'); 
+    require_once('menu.php'); 
 ?>
 <h1>Manage Pictures</h1>
 <?php
@@ -15,7 +15,7 @@
     if (isset($_POST['new-pic-src']) && isset($_POST['new-pic-alt'])) {
         if (addPicture($_POST['new-pic-src'], $_POST['new-pic-alt'])) {
             # picture uploaded
-            header('Location: '.getBaseDir().'manage-pics.php');
+            header('Location: '.getBaseDir().'/manage/pics.php');
         } else {
             # picture upload failed
             echo '
@@ -28,7 +28,7 @@
 
     # New pic form
 ?>
-    <form action="<?php echo(getBaseDir());?>manage-pics.php" method="POST" class="mgmt-form">
+    <form action="<?php echo(getBaseDir());?>/manage/pics.php" method="POST" class="mgmt-form">
         <h4>Add pictures here:</h4>
         <div class="form-group">
             <label for="new-pic-src">Source:</label>
@@ -44,7 +44,7 @@
     # Process delete picture
     if (isset($_POST['delpicid'])) {
         if (deletePic($_POST['delpicid'])) {
-            header('Location: '.getBaseDir().'manage-pics.php');
+            header('Location: '.getBaseDir().'/manage/pics.php');
         } else {
             # delete pic failed
             echo '
@@ -69,7 +69,7 @@
                     <p><b>Last Updated: </b><br><?php echo($pics[$i][3]); ?></p>
                     <p><b>Alt: </b><br><?php echo($pics[$i][2]); ?></p>
                 </p>
-                <form class="mgmt-delpic" action="<?php echo(getBaseDir());?>manage-pics.php" method="POST">
+                <form class="mgmt-delpic" action="<?php echo(getBaseDir());?>/manage/pics.php" method="POST">
                     <input type="hidden" name="delpicid" value="<?php echo($pics[$i][0]); ?>">
                     <input type="submit" value="Unlist" class="btn btn-primary">
                 </form>
@@ -80,7 +80,7 @@
 
 <?php
 # Footer
-require_once('footer.php'); 
+require_once('../footer.php'); 
 ?>
 
 
